@@ -137,3 +137,27 @@ export function PlaneMarkerIcon(props: IconProps) {
     </svg>
   )
 }
+
+export function ArrowRightIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 12h16M13 5l7 7-7 7" />
+    </svg>
+  )
+}
+
+export function CloseIcon(props: IconProps) {
+  return (
+    <svg {...base} strokeWidth={2} {...props}>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  )
+}
+
+export function PlusIcon(props: IconProps) {
+  return (
+    <svg {...base} strokeWidth={2} {...props}>
+      <path d="M12 5v14M5 12h14" />
+    </svg>
+  )
+}

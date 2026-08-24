@@ -1,4 +1,4 @@
-import type { ActiveUser, Flight, NavItem } from './types'
+import type { ActiveUser, Flight, FlightSegment, NavItem } from './types'
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard' },
@@ -17,6 +17,20 @@ export const ACTIVE_USERS: ActiveUser[] = [
 ]
 
 export const ACTIVE_USERS_OVERFLOW = 70
+
+export const DEFAULT_SEGMENTS: FlightSegment[] = [
+  { id: 'seg-1', from: 'New York (JFK)', to: 'Mumbai (BOM)', date: '29 July 2019' },
+  { id: 'seg-2', from: 'Mumbai (BOM)', to: 'New York (JFK)', date: '5 August 2019' },
+]
+
+export function createEmptySegment(): FlightSegment {
+  return {
+    id: crypto.randomUUID(),
+    from: 'Select origin',
+    to: 'Select destination',
+    date: 'Select date',
+  }
+}
 
 export const FLIGHTS: Flight[] = [
   {
