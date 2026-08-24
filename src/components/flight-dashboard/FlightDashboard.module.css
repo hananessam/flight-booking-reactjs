@@ -1,0 +1,64 @@
+.dashboard {
+  --fd-green: #2c4a43;
+  --fd-on-green: #eaf2ef;
+  --fd-gold: #d9a544;
+  --fd-gold-shadow: rgba(217, 165, 68, 0.7);
+  --fd-mint: #dceae4;
+  --fd-white: #ffffff;
+  --fd-field-bg: #f2f6f4;
+  --fd-text: #1f2d2a;
+  --fd-muted: #5c7b72;
+  --fd-subtle: #8b9c97;
+  --fd-shadow: rgba(30, 50, 45, 0.28);
+  --fd-shadow-strong: rgba(28, 46, 42, 0.5);
+
+  position: relative;
+  display: flex;
+  gap: 24px;
+  min-width: 1180px;
+  min-height: 820px;
+  padding: 44px;
+  background: var(--fd-mint);
+  overflow: hidden;
+  font-family: 'Poppins', var(--sans), sans-serif;
+  color: var(--fd-text);
+}
+
+.blobGold {
+  position: absolute;
+  top: -90px;
+  left: -70px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--fd-gold);
+  opacity: 0.95;
+  z-index: 0;
+}
+
+.blobMint {
+  position: absolute;
+  bottom: -170px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 0;
+}
+
+.main {
+  flex-grow: 1;
+  min-width: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.resultsRow {
+  flex-grow: 1;
+  display: flex;
+  gap: 18px;
+  min-height: 0;
+}
