@@ -1,4 +1,13 @@
-import type { ActiveUser, CityOption, Flight, FlightSegment, NavItem, SeatClassOption } from './types'
+import type {
+  ActiveUser,
+  CityOption,
+  Flight,
+  FlightSegment,
+  NavItem,
+  SearchCriteria,
+  SeatClassOption,
+  TripType,
+} from './types'
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard' },
@@ -7,6 +16,12 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'reports', label: 'Reports' },
   { id: 'statistics', label: 'Statistics' },
   { id: 'settings', label: 'Settings' },
+]
+
+export const TRIP_TYPES: { id: TripType; label: string }[] = [
+  { id: 'one-way', label: 'One way' },
+  { id: 'round-trip', label: 'Round trip' },
+  { id: 'multi-city', label: 'Multi city' },
 ]
 
 export const ACTIVE_USERS: ActiveUser[] = [
@@ -45,6 +60,17 @@ export const DEFAULT_DESTINATION: CityOption = CITIES[1]
 export const DEFAULT_DEPARTURE_DATE = new Date(2019, 6, 29)
 export const DEFAULT_RETURN_DATE = new Date(2019, 7, 5)
 
+export const DEFAULT_SEARCH: SearchCriteria = {
+  tripType: 'one-way',
+  origin: DEFAULT_ORIGIN,
+  destination: DEFAULT_DESTINATION,
+  departureDate: DEFAULT_DEPARTURE_DATE,
+  returnDate: null,
+  travellers: 2,
+  seatClass: DEFAULT_SEAT_CLASS,
+  segments: [],
+}
+
 export const DEFAULT_SEGMENTS: FlightSegment[] = [
   { id: 'seg-1', from: DEFAULT_ORIGIN, to: DEFAULT_DESTINATION, date: DEFAULT_DEPARTURE_DATE },
   { id: 'seg-2', from: DEFAULT_DESTINATION, to: DEFAULT_ORIGIN, date: DEFAULT_RETURN_DATE },
@@ -59,6 +85,8 @@ export function createEmptySegment(): FlightSegment {
   }
 }
 
+const ALL_CLASSES: SeatClassOption['id'][] = ['economy', 'premium-economy', 'business', 'first-class']
+
 export const FLIGHTS: Flight[] = [
   {
     id: 'fl-1',
@@ -70,6 +98,9 @@ export const FLIGHTS: Flight[] = [
     duration: '11h 20m',
     stops: 'non-stop',
     price: 1572,
+    date: DEFAULT_DEPARTURE_DATE,
+    availableClasses: ALL_CLASSES,
+    seatsAvailable: 4,
   },
   {
     id: 'fl-2',
@@ -81,6 +112,9 @@ export const FLIGHTS: Flight[] = [
     duration: '11h 20m',
     stops: 'non-stop',
     price: 2072,
+    date: DEFAULT_DEPARTURE_DATE,
+    availableClasses: ALL_CLASSES,
+    seatsAvailable: 6,
   },
   {
     id: 'fl-3',
@@ -92,6 +126,9 @@ export const FLIGHTS: Flight[] = [
     duration: '14h 10m',
     stops: 'one-stop',
     price: 1288,
+    date: DEFAULT_DEPARTURE_DATE,
+    availableClasses: ['economy', 'premium-economy', 'business'],
+    seatsAvailable: 5,
   },
   {
     id: 'fl-4',
@@ -103,6 +140,9 @@ export const FLIGHTS: Flight[] = [
     duration: '14h 20m',
     stops: 'one-stop',
     price: 1345,
+    date: DEFAULT_DEPARTURE_DATE,
+    availableClasses: ALL_CLASSES,
+    seatsAvailable: 2,
   },
   {
     id: 'fl-5',
@@ -114,6 +154,9 @@ export const FLIGHTS: Flight[] = [
     duration: '20h 45m',
     stops: 'more-stops',
     price: 1042,
+    date: DEFAULT_DEPARTURE_DATE,
+    availableClasses: ['economy', 'premium-economy'],
+    seatsAvailable: 9,
   },
   {
     id: 'fl-6',
@@ -125,5 +168,8 @@ export const FLIGHTS: Flight[] = [
     duration: '22h 35m',
     stops: 'more-stops',
     price: 986,
+    date: DEFAULT_DEPARTURE_DATE,
+    availableClasses: ['economy'],
+    seatsAvailable: 9,
   },
 ]

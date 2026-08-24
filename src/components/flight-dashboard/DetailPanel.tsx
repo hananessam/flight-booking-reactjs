@@ -1,4 +1,4 @@
-import type { StopFilter } from './types'
+import type { CityOption, StopFilter } from './types'
 import { PlaneMarkerIcon } from './icons'
 import styles from './DetailPanel.module.css'
 
@@ -11,11 +11,13 @@ const STOP_FILTERS: { id: StopFilter; label: string }[] = [
 const PRICE_RANGE = { min: 500, max: 2500 }
 
 interface DetailPanelProps {
+  readonly origin: CityOption
+  readonly destination: CityOption
   readonly stopFilter: StopFilter
   readonly onStopFilterChange: (filter: StopFilter) => void
 }
 
-export function DetailPanel({ stopFilter, onStopFilterChange }: DetailPanelProps) {
+export function DetailPanel({ origin, destination, stopFilter, onStopFilterChange }: DetailPanelProps) {
   const activeLabel = STOP_FILTERS.find((filter) => filter.id === stopFilter)?.label
 
   return (
@@ -23,7 +25,7 @@ export function DetailPanel({ stopFilter, onStopFilterChange }: DetailPanelProps
       <div className={styles.route}>
         <div className={styles.routeEndpoint}>
           <span className={styles.routeLabel}>From</span>
-          <span className={styles.routeCode}>JFK</span>
+          <span className={styles.routeCode}>{origin.code}</span>
         </div>
         <div className={styles.routeMid} aria-hidden="true">
           <PlaneMarkerIcon className={styles.routeMidIcon} />
@@ -31,7 +33,7 @@ export function DetailPanel({ stopFilter, onStopFilterChange }: DetailPanelProps
         </div>
         <div className={`${styles.routeEndpoint} ${styles.routeEndpointEnd}`}>
           <span className={styles.routeLabel}>To</span>
-          <span className={styles.routeCode}>BOM</span>
+          <span className={styles.routeCode}>{destination.code}</span>
         </div>
       </div>
 
@@ -44,8 +46,8 @@ export function DetailPanel({ stopFilter, onStopFilterChange }: DetailPanelProps
           <circle className={styles.mapRing} cx="190" cy="40" r="9" />
         </svg>
         <PlaneMarkerIcon className={styles.mapPlane} />
-        <span className={`${styles.mapCity} ${styles.mapCityFrom}`}>New York</span>
-        <span className={`${styles.mapCity} ${styles.mapCityTo}`}>Mumbai</span>
+        <span className={`${styles.mapCity} ${styles.mapCityFrom}`}>{origin.city}</span>
+        <span className={`${styles.mapCity} ${styles.mapCityTo}`}>{destination.city}</span>
       </div>
 
       <fieldset className={styles.stopFilters}>

@@ -33,7 +33,7 @@ export function FlightResults({ flights }: FlightResultsProps) {
           ))}
         </ul>
       ) : (
-        <p className={styles.empty}>No flights match this filter.</p>
+        <p className={styles.empty}>No flights match your search.</p>
       )}
     </section>
   )

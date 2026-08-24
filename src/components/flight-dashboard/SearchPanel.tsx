@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import type { CityOption, FlightSegment, TripType } from './types'
+import { useState, type SubmitEvent } from 'react'
+import type { CityOption, FlightSegment, SearchCriteria, TripType } from './types'
 import {
   DEFAULT_DEPARTURE_DATE,
   DEFAULT_DESTINATION,
@@ -7,6 +7,7 @@ import {
   DEFAULT_RETURN_DATE,
   DEFAULT_SEAT_CLASS,
   DEFAULT_SEGMENTS,
+  TRIP_TYPES,
   createEmptySegment,
 } from './data'
 import { PlusIcon, SwapIcon } from './icons'
@@ -18,16 +19,14 @@ import { FlightSegmentRow } from './FlightSegmentRow'
 import fieldStyles from './fields.module.css'
 import styles from './SearchPanel.module.css'
 
-const TRIP_TYPES: { id: TripType; label: string }[] = [
-  { id: 'one-way', label: 'One way' },
-  { id: 'round-trip', label: 'Round trip' },
-  { id: 'multi-city', label: 'Multi city' },
-]
-
 const MIN_SEGMENTS = 2
 const MAX_SEGMENTS = 5
 
-export function SearchPanel() {
+interface SearchPanelProps {
+  readonly onSearch: (criteria: SearchCriteria) => void
+}
+
+export function SearchPanel({ onSearch }: SearchPanelProps) {
   const [tripType, setTripType] = useState<TripType>('one-way')
   const [origin, setOrigin] = useState<CityOption>(DEFAULT_ORIGIN)
   const [destination, setDestination] = useState<CityOption>(DEFAULT_DESTINATION)
@@ -54,8 +53,26 @@ export function SearchPanel() {
     setSegments((prev) => prev.map((segment) => (segment.id === updated.id ? updated : segment)))
   }
 
+  function handleSubmit(event: SubmitEvent) {
+    event.preventDefault()
+
+    const route = tripType === 'multi-city' ? segments[0] : { from: origin, to: destination }
+    if (!route.from || !route.to) return
+
+    onSearch({
+      tripType,
+      origin: route.from,
+      destination: route.to,
+      departureDate: tripType === 'multi-city' ? (segments[0].date ?? departureDate) : departureDate,
+      returnDate: tripType === 'round-trip' ? returnDate : null,
+      travellers,
+      seatClass,
+      segments: tripType === 'multi-city' ? segments : [],
+    })
+  }
+
   return (
-    <form className={styles.panel} onSubmit={(event) => event.preventDefault()}>
+    <form className={styles.panel} onSubmit={handleSubmit}>
       {tripType === 'multi-city' ? (
         <div className={styles.segments}>
           {segments.map((segment, index) => (
