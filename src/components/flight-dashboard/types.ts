@@ -26,6 +26,13 @@ export interface FlightSegment {
   date: Date | null
 }
 
+export type SeatClassId = 'economy' | 'premium-economy' | 'business' | 'first-class'
+
+export interface SeatClassOption {
+  id: SeatClassId
+  label: string
+}
+
 export interface NavItem {
   id: string
   label: string

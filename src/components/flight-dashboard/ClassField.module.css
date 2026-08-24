@@ -1,0 +1,62 @@
+.wrapper {
+  position: relative;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  background: var(--fd-field-bg);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fd-text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chevron {
+  width: 13px;
+  height: 13px;
+  color: var(--fd-muted);
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  width: 180px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: 16px;
+  background: var(--fd-white);
+  box-shadow: 0 20px 40px -16px var(--fd-shadow-strong);
+}
+
+.option {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fd-text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.option:hover {
+  background: var(--fd-field-bg);
+}
+
+.option[data-selected='true'] {
+  background: var(--fd-field-bg);
+  color: var(--fd-green);
+}

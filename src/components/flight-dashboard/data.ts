@@ -1,4 +1,4 @@
-import type { ActiveUser, CityOption, Flight, FlightSegment, NavItem } from './types'
+import type { ActiveUser, CityOption, Flight, FlightSegment, NavItem, SeatClassOption } from './types'
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard' },
@@ -30,6 +30,15 @@ export const CITIES: CityOption[] = [
   { code: 'FRA', city: 'Frankfurt' },
   { code: 'DOH', city: 'Doha' },
 ]
+
+export const SEAT_CLASSES: SeatClassOption[] = [
+  { id: 'economy', label: 'Economy' },
+  { id: 'premium-economy', label: 'Premium economy' },
+  { id: 'business', label: 'Business' },
+  { id: 'first-class', label: 'First class' },
+]
+
+export const DEFAULT_SEAT_CLASS: SeatClassOption = SEAT_CLASSES[3]
 
 export const DEFAULT_ORIGIN: CityOption = CITIES[0]
 export const DEFAULT_DESTINATION: CityOption = CITIES[1]

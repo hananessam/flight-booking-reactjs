@@ -5,11 +5,13 @@ import {
   DEFAULT_DESTINATION,
   DEFAULT_ORIGIN,
   DEFAULT_RETURN_DATE,
+  DEFAULT_SEAT_CLASS,
   DEFAULT_SEGMENTS,
   createEmptySegment,
 } from './data'
-import { ChevronDownIcon, PlusIcon, SeatClassIcon, SwapIcon } from './icons'
+import { PlusIcon, SwapIcon } from './icons'
 import { CityField } from './CityField'
+import { ClassField } from './ClassField'
 import { DateField } from './DateField'
 import { TravellerField } from './TravellerField'
 import { FlightSegmentRow } from './FlightSegmentRow'
@@ -32,6 +34,7 @@ export function SearchPanel() {
   const [departureDate, setDepartureDate] = useState(DEFAULT_DEPARTURE_DATE)
   const [returnDate, setReturnDate] = useState(DEFAULT_RETURN_DATE)
   const [travellers, setTravellers] = useState(2)
+  const [seatClass, setSeatClass] = useState(DEFAULT_SEAT_CLASS)
   const [segments, setSegments] = useState<FlightSegment[]>(DEFAULT_SEGMENTS)
 
   function swapCities() {
@@ -111,11 +114,7 @@ export function SearchPanel() {
         </fieldset>
 
         <div className={styles.rightOptions}>
-          <button type="button" className={styles.classSelector}>
-            <SeatClassIcon className={fieldStyles.fieldIcon} />
-            <span>First class</span>
-            <ChevronDownIcon className={styles.chevron} />
-          </button>
+          <ClassField value={seatClass} onChange={setSeatClass} />
 
           <button type="submit" className={styles.searchButton}>
             Search
