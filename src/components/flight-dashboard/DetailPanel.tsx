@@ -2,6 +2,7 @@ import { PRICE_RANGE } from './data'
 import type { CityOption, PriceRange, StopFilter } from './types'
 import { PlaneMarkerIcon } from './icons'
 import { PriceRangeSlider } from './PriceRangeSlider'
+import { WorldMap } from './WorldMap'
 import styles from './DetailPanel.module.css'
 
 const STOP_FILTERS: { id: StopFilter; label: string }[] = [
@@ -46,18 +47,7 @@ export function DetailPanel({
         </div>
       </div>
 
-      <div className={styles.map} aria-hidden="true">
-        <svg className={styles.mapSvg} viewBox="0 0 246 190">
-          <path className={styles.mapLine} d="M30 150 C 80 90, 150 130, 190 40" />
-          <circle className={styles.mapDot} cx="30" cy="150" r="4.5" />
-          <circle className={styles.mapRing} cx="30" cy="150" r="9" />
-          <circle className={styles.mapDot} cx="190" cy="40" r="4.5" />
-          <circle className={styles.mapRing} cx="190" cy="40" r="9" />
-        </svg>
-        <PlaneMarkerIcon className={styles.mapPlane} />
-        <span className={`${styles.mapCity} ${styles.mapCityFrom}`}>{origin.city}</span>
-        <span className={`${styles.mapCity} ${styles.mapCityTo}`}>{destination.city}</span>
-      </div>
+      <WorldMap origin={origin} destination={destination} />
 
       <fieldset className={styles.stopFilters}>
         <legend className={styles.visuallyHidden}>Number of stops</legend>

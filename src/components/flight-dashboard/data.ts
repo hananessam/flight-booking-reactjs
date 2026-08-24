@@ -63,16 +63,16 @@ export const ACTIVE_USERS: ActiveUser[] = [
 export const ACTIVE_USERS_OVERFLOW = 70
 
 export const CITIES: CityOption[] = [
-  { code: 'JFK', city: 'New York' },
-  { code: 'BOM', city: 'Mumbai' },
-  { code: 'LHR', city: 'London' },
-  { code: 'DXB', city: 'Dubai' },
-  { code: 'SIN', city: 'Singapore' },
-  { code: 'CDG', city: 'Paris' },
-  { code: 'HND', city: 'Tokyo' },
-  { code: 'SYD', city: 'Sydney' },
-  { code: 'FRA', city: 'Frankfurt' },
-  { code: 'DOH', city: 'Doha' },
+  { code: 'JFK', city: 'New York', lat: 40.64, lon: -73.78 },
+  { code: 'BOM', city: 'Mumbai', lat: 19.09, lon: 72.87 },
+  { code: 'LHR', city: 'London', lat: 51.47, lon: -0.45 },
+  { code: 'DXB', city: 'Dubai', lat: 25.25, lon: 55.36 },
+  { code: 'SIN', city: 'Singapore', lat: 1.35, lon: 103.99 },
+  { code: 'CDG', city: 'Paris', lat: 49.0, lon: 2.55 },
+  { code: 'HND', city: 'Tokyo', lat: 35.55, lon: 139.78 },
+  { code: 'SYD', city: 'Sydney', lat: -33.95, lon: 151.18 },
+  { code: 'FRA', city: 'Frankfurt', lat: 50.03, lon: 8.57 },
+  { code: 'DOH', city: 'Doha', lat: 25.27, lon: 51.61 },
 ]
 
 export const SEAT_CLASSES: SeatClassOption[] = [

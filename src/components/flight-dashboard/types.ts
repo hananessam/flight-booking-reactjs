@@ -22,6 +22,8 @@ export interface Flight {
 export interface CityOption {
   code: string
   city: string
+  lat: number
+  lon: number
 }
 
 export interface FlightSegment {
