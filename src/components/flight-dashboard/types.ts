@@ -2,6 +2,8 @@ export type TripType = 'one-way' | 'round-trip' | 'multi-city'
 
 export type StopFilter = 'non-stop' | 'one-stop' | 'more-stops'
 
+export type PriceRange = readonly [min: number, max: number]
+
 export interface Flight {
   id: string
   airline: string

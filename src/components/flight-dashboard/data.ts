@@ -4,6 +4,7 @@ import type {
   Flight,
   FlightSegment,
   NavItem,
+  PriceRange,
   SearchCriteria,
   SeatClassOption,
   TripType,
@@ -59,6 +60,9 @@ export const DEFAULT_ORIGIN: CityOption = CITIES[0]
 export const DEFAULT_DESTINATION: CityOption = CITIES[1]
 export const DEFAULT_DEPARTURE_DATE = new Date(2019, 6, 29)
 export const DEFAULT_RETURN_DATE = new Date(2019, 7, 5)
+
+export const PRICE_RANGE = { min: 500, max: 2500, step: 50 }
+export const DEFAULT_PRICE_RANGE: PriceRange = [PRICE_RANGE.min, PRICE_RANGE.max]
 
 export const DEFAULT_SEARCH: SearchCriteria = {
   tripType: 'one-way',

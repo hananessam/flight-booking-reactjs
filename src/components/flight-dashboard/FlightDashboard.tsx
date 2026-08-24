@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
-import { DEFAULT_SEARCH, FLIGHTS } from './data'
-import type { SearchCriteria, StopFilter } from './types'
+import { DEFAULT_PRICE_RANGE, DEFAULT_SEARCH, FLIGHTS } from './data'
+import type { PriceRange, SearchCriteria, StopFilter } from './types'
 import { isSameDay } from './date'
 import { Sidebar } from './Sidebar'
 import { SearchPanel } from './SearchPanel'
@@ -12,6 +12,7 @@ import styles from './FlightDashboard.module.css'
 export function FlightDashboard() {
   const [search, setSearch] = useState<SearchCriteria>(DEFAULT_SEARCH)
   const [stopFilter, setStopFilter] = useState<StopFilter>('non-stop')
+  const [priceRange, setPriceRange] = useState<PriceRange>(DEFAULT_PRICE_RANGE)
 
   const filteredFlights = useMemo(
     () =>
@@ -22,9 +23,11 @@ export function FlightDashboard() {
           flight.stops === stopFilter &&
           isSameDay(flight.date, search.departureDate) &&
           flight.availableClasses.includes(search.seatClass.id) &&
-          flight.seatsAvailable >= search.travellers,
+          flight.seatsAvailable >= search.travellers &&
+          flight.price >= priceRange[0] &&
+          flight.price <= priceRange[1],
       ),
-    [search, stopFilter],
+    [search, stopFilter, priceRange],
   )
 
   return (
@@ -46,6 +49,8 @@ export function FlightDashboard() {
             destination={search.destination}
             stopFilter={stopFilter}
             onStopFilterChange={setStopFilter}
+            priceRange={priceRange}
+            onPriceRangeChange={setPriceRange}
           />
         </div>
       </main>

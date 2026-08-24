@@ -1,5 +1,7 @@
-import type { CityOption, StopFilter } from './types'
+import { PRICE_RANGE } from './data'
+import type { CityOption, PriceRange, StopFilter } from './types'
 import { PlaneMarkerIcon } from './icons'
+import { PriceRangeSlider } from './PriceRangeSlider'
 import styles from './DetailPanel.module.css'
 
 const STOP_FILTERS: { id: StopFilter; label: string }[] = [
@@ -8,16 +10,23 @@ const STOP_FILTERS: { id: StopFilter; label: string }[] = [
   { id: 'more-stops', label: 'More stop' },
 ]
 
-const PRICE_RANGE = { min: 500, max: 2500 }
-
 interface DetailPanelProps {
   readonly origin: CityOption
   readonly destination: CityOption
   readonly stopFilter: StopFilter
   readonly onStopFilterChange: (filter: StopFilter) => void
+  readonly priceRange: PriceRange
+  readonly onPriceRangeChange: (range: PriceRange) => void
 }
 
-export function DetailPanel({ origin, destination, stopFilter, onStopFilterChange }: DetailPanelProps) {
+export function DetailPanel({
+  origin,
+  destination,
+  stopFilter,
+  onStopFilterChange,
+  priceRange,
+  onPriceRangeChange,
+}: DetailPanelProps) {
   const activeLabel = STOP_FILTERS.find((filter) => filter.id === stopFilter)?.label
 
   return (
@@ -68,14 +77,16 @@ export function DetailPanel({ origin, destination, stopFilter, onStopFilterChang
 
       <div className={styles.priceSection}>
         <span className={styles.priceLabel}>Price</span>
-        <div className={styles.track} aria-hidden="true">
-          <div className={styles.trackFill} />
-          <div className={`${styles.handle} ${styles.handleMin}`} />
-          <div className={`${styles.handle} ${styles.handleMax}`} />
-        </div>
+        <PriceRangeSlider
+          min={PRICE_RANGE.min}
+          max={PRICE_RANGE.max}
+          step={PRICE_RANGE.step}
+          value={priceRange}
+          onChange={onPriceRangeChange}
+        />
         <div className={styles.priceBounds}>
-          <span>${PRICE_RANGE.min}</span>
-          <span>${PRICE_RANGE.max}</span>
+          <span>${priceRange[0]}</span>
+          <span>${priceRange[1]}</span>
         </div>
       </div>
     </aside>
