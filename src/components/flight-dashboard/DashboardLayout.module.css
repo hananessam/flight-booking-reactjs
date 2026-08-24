@@ -55,10 +55,3 @@
   flex-direction: column;
   gap: 18px;
 }
-
-.resultsRow {
-  flex-grow: 1;
-  display: flex;
-  gap: 18px;
-  min-height: 0;
-}

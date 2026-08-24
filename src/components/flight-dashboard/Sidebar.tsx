@@ -1,4 +1,5 @@
-import { useState, type ComponentType } from 'react'
+import type { ComponentType } from 'react'
+import { NavLink } from 'react-router-dom'
 import { ACTIVE_USERS, ACTIVE_USERS_OVERFLOW, NAV_ITEMS } from './data'
 import {
   HomeIcon,
@@ -21,8 +22,6 @@ const NAV_ICONS: Record<string, ComponentType<{ className?: string }>> = {
 }
 
 export function Sidebar() {
-  const [activeId, setActiveId] = useState('flights')
-
   return (
     <aside className={styles.sidebar}>
       <header className={styles.profile}>
@@ -39,19 +38,15 @@ export function Sidebar() {
         <ul className={styles.navList}>
           {NAV_ITEMS.map((item) => {
             const Icon = NAV_ICONS[item.id]
-            const isActive = item.id === activeId
             return (
               <li key={item.id}>
-                <button
-                  type="button"
-                  className={styles.navItem}
-                  data-active={isActive}
-                  aria-current={isActive ? 'page' : undefined}
-                  onClick={() => setActiveId(item.id)}
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) => (isActive ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem)}
                 >
                   <Icon className={styles.navIcon} />
                   <span>{item.label}</span>
-                </button>
+                </NavLink>
               </li>
             )
           })}

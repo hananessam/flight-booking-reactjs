@@ -11,12 +11,40 @@ import type {
 } from './types'
 
 export const NAV_ITEMS: NavItem[] = [
-  { id: 'dashboard', label: 'Dashboard' },
-  { id: 'flights', label: 'Flights' },
-  { id: 'wallet', label: 'Wallet' },
-  { id: 'reports', label: 'Reports' },
-  { id: 'statistics', label: 'Statistics' },
-  { id: 'settings', label: 'Settings' },
+  { id: 'dashboard', label: 'Dashboard', path: '/dashboard' },
+  { id: 'flights', label: 'Flights', path: '/flights' },
+  { id: 'wallet', label: 'Wallet', path: '/wallet' },
+  { id: 'reports', label: 'Reports', path: '/reports' },
+  { id: 'statistics', label: 'Statistics', path: '/statistics' },
+  { id: 'settings', label: 'Settings', path: '/settings' },
+]
+
+export const PLACEHOLDER_PAGES: { path: string; title: string; description: string }[] = [
+  {
+    path: '/dashboard',
+    title: 'Dashboard',
+    description: 'An overview of your account activity will live here soon.',
+  },
+  {
+    path: '/wallet',
+    title: 'Wallet',
+    description: 'Manage saved cards and travel credit from this page soon.',
+  },
+  {
+    path: '/reports',
+    title: 'Reports',
+    description: 'Download trip and spending reports from this page soon.',
+  },
+  {
+    path: '/statistics',
+    title: 'Statistics',
+    description: 'Visualize your travel history and spending trends here soon.',
+  },
+  {
+    path: '/settings',
+    title: 'Settings',
+    description: 'Update your profile, preferences and notifications here soon.',
+  },
 ]
 
 export const TRIP_TYPES: { id: TripType; label: string }[] = [

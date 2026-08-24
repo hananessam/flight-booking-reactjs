@@ -79,11 +79,13 @@
   font-weight: 600;
   letter-spacing: 0.8px;
   text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
   text-align: left;
+  box-sizing: border-box;
 }
 
-.navItem[data-active='true'] {
+.navItemActive {
   background: #fff;
   color: var(--fd-green);
   font-weight: 700;
