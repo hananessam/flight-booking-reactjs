@@ -1,78 +1,51 @@
-# React + TypeScript + Vite
+# Flight Booking Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A flight search dashboard UI built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+**Live demo:** [flight-booking-reactjs.vercel.app](https://flight-booking-reactjs.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Flight search** — origin/destination pickers, a real calendar date picker, a traveller-count stepper, seat class selection, and one-way / round-trip / multi-city trip types
+- **Real filtering** — results are filtered by route, date, number of stops, seat class, traveller capacity, and a draggable price range, all against mock flight data
+- **World map** — the detail panel renders an actual world map (sampled from real coastline data) and plots the searched route with a curved flight path
+- **Client-side routing** — a persistent sidebar (Dashboard, Flights, Wallet, Reports, Statistics, Settings) backed by React Router; Flights is the fully built page, the rest are placeholders
+- **Responsive** — the sidebar collapses to an icon rail, search fields and results stack, and flight cards reflow on narrow screens
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech stack
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/) with the React Compiler enabled
+- [React Router](https://reactrouter.com/) for client-side routing
+- [Tailwind CSS v4](https://tailwindcss.com/) for responsive layout, alongside CSS Modules for component styling
+- [world-atlas](https://github.com/topojson/world-atlas) + [d3-geo](https://github.com/d3/d3-geo) (dev-only) to generate the world map's land data at build time
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the printed local URL in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Type-check and build for production |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+| `npm run generate:map` | Regenerate `landGrid.generated.ts` from real coastline data |
 
-```
+## Project structure
+
+Most of the app lives in `src/components/flight-dashboard/`:
+
+- `DashboardLayout.tsx` — the shared shell (sidebar + content outlet)
+- `pages/` — route-level pages (`FlightsPage`, `PlaceholderPage`)
+- `SearchPanel.tsx` + field components (`CityField`, `DateField`, `TravellerField`, `ClassField`) — the search form
+- `FlightResults.tsx` / `FlightCard.tsx` — the results list
+- `DetailPanel.tsx` / `WorldMap.tsx` / `mapProjection.ts` — the route map and price/stop filters
+- `data.ts` / `types.ts` — mock flight data and shared types
