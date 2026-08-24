@@ -66,7 +66,7 @@
 }
 
 .tripTab {
-  padding: 11px 24px;
+  padding: 11px 8px;
   border-radius: 999px;
   border: none;
   background: transparent;
@@ -86,7 +86,6 @@
 
 .rightOptions {
   display: flex;
-  align-items: center;
   gap: 12px;
 }
 

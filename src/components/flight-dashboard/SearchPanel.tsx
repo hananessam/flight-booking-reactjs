@@ -120,7 +120,7 @@ export function SearchPanel({ onSearch }: SearchPanelProps) {
             <button
               key={trip.id}
               type="button"
-              className={`${styles.tripTab} flex-1 text-center sm:flex-none`}
+              className={`${styles.tripTab} flex-1 text-center sm:flex-none sm:px-6`}
               data-active={trip.id === tripType}
               aria-pressed={trip.id === tripType}
               onClick={() => setTripType(trip.id)}
@@ -130,10 +130,10 @@ export function SearchPanel({ onSearch }: SearchPanelProps) {
           ))}
         </fieldset>
 
-        <div className={styles.rightOptions}>
+        <div className={`${styles.rightOptions} flex-col items-stretch gap-2 sm:flex-row sm:items-center`}>
           <ClassField value={seatClass} onChange={setSeatClass} />
 
-          <button type="submit" className={`${styles.searchButton} flex-1 sm:flex-none`}>
+          <button type="submit" className={styles.searchButton}>
             Search
           </button>
         </div>
