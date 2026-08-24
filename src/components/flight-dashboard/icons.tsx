@@ -174,3 +174,11 @@ export function ChevronRightIcon(props: IconProps) {
     </svg>
   )
 }
+
+export function MenuIcon(props: IconProps) {
+  return (
+    <svg {...base} strokeWidth={2} {...props}>
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  )
+}

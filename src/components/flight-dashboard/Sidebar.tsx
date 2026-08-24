@@ -2,6 +2,7 @@ import type { ComponentType } from 'react'
 import { NavLink } from 'react-router-dom'
 import { ACTIVE_USERS, ACTIVE_USERS_OVERFLOW, NAV_ITEMS } from './data'
 import {
+  CloseIcon,
   HomeIcon,
   PlaneIcon,
   PlaneMarkerIcon,
@@ -21,17 +22,34 @@ const NAV_ICONS: Record<string, ComponentType<{ className?: string }>> = {
   settings: SettingsIcon,
 }
 
-export function Sidebar() {
+interface SidebarProps {
+  /** Extra classes for positioning — static on desktop, a slide-in drawer below lg. */
+  readonly className?: string
+  /** Called when a nav link is clicked, so the drawer can close itself on navigation. */
+  readonly onNavigate?: () => void
+  /** When provided, renders a close button (only shown below lg). */
+  readonly onClose?: () => void
+}
+
+export function Sidebar({ className, onNavigate, onClose }: SidebarProps) {
   return (
-    <aside className={`${styles.sidebar} w-21 gap-5 px-3 py-5 lg:w-62 lg:gap-6 lg:px-5 lg:py-7`}>
-      <header className={styles.profile}>
-        <div
-          className={`${styles.avatar} w-11 h-11 text-sm lg:h-[78px] lg:w-[78px] lg:text-[22px]`}
-          aria-hidden="true"
+    <aside className={`${styles.sidebar} gap-6 px-5 py-7 ${className ?? ''}`}>
+      {onClose && (
+        <button
+          type="button"
+          className={`${styles.closeButton} flex lg:hidden`}
+          onClick={onClose}
+          aria-label="Close navigation"
         >
+          <CloseIcon className="h-4 w-4" />
+        </button>
+      )}
+
+      <header className={styles.profile}>
+        <div className={`${styles.avatar} h-[78px] w-[78px] text-[22px]`} aria-hidden="true">
           AJ
         </div>
-        <div className="hidden flex-col items-center gap-0.5 lg:flex">
+        <div className={styles.identity}>
           <p className={styles.name}>Alex Johnson</p>
           <p className={styles.email}>alex.johnson@gmail.com</p>
         </div>
@@ -45,12 +63,13 @@ export function Sidebar() {
               <li key={item.id}>
                 <NavLink
                   to={item.path}
+                  onClick={onNavigate}
                   className={({ isActive }) =>
-                    `${isActive ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem} justify-center p-3 lg:justify-start lg:px-4 lg:py-3`
+                    `${isActive ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem} px-4 py-3`
                   }
                 >
                   <Icon className={styles.navIcon} />
-                  <span className="sr-only lg:not-sr-only">{item.label}</span>
+                  <span>{item.label}</span>
                 </NavLink>
               </li>
             )
@@ -58,7 +77,7 @@ export function Sidebar() {
         </ul>
       </nav>
 
-      <div className="hidden flex-col gap-2.5 lg:flex">
+      <div className={styles.activeUsers}>
         <p className={styles.activeUsersLabel}>Active users</p>
         <ul className={styles.avatarStack}>
           {ACTIVE_USERS.map((user) => (
@@ -74,7 +93,7 @@ export function Sidebar() {
         </ul>
       </div>
 
-      <div className={`${styles.routeMap} hidden lg:block`} aria-hidden="true">
+      <div className={styles.routeMap} aria-hidden="true">
         <svg className={styles.routeMapSvg} viewBox="0 0 208 150">
           <path
             className={styles.routeLine}

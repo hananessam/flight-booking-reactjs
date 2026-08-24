@@ -44,6 +44,19 @@
   z-index: 0;
 }
 
+.navToggle {
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--fd-green);
+  color: #fff;
+  box-shadow: 0 14px 28px -14px var(--fd-shadow-strong);
+  cursor: pointer;
+}
+
 .main {
   flex-grow: 1;
   min-width: 0;
