@@ -31,7 +31,7 @@ export function DetailPanel({
   const activeLabel = STOP_FILTERS.find((filter) => filter.id === stopFilter)?.label
 
   return (
-    <aside className={styles.panel} aria-label="Route and price filters">
+    <aside className={`${styles.panel} w-full lg:w-[290px]`} aria-label="Route and price filters">
       <div className={styles.route}>
         <div className={styles.routeEndpoint}>
           <span className={styles.routeLabel}>From</span>

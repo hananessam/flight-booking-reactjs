@@ -96,7 +96,7 @@ export function SearchPanel({ onSearch }: SearchPanelProps) {
           <TravellerField value={travellers} onChange={setTravellers} className={styles.travellerField} />
         </div>
       ) : (
-        <div className={styles.fieldsRow}>
+        <div className={`${styles.fieldsRow} flex-col items-stretch md:flex-row md:items-center`}>
           <CityField value={origin} onChange={setOrigin} excludeCode={destination.code} ariaLabel="Origin" />
 
           <button type="button" className={fieldStyles.swapButton} aria-label="Swap origin and destination" onClick={swapCities}>
@@ -113,14 +113,14 @@ export function SearchPanel({ onSearch }: SearchPanelProps) {
         </div>
       )}
 
-      <div className={styles.optionsRow}>
-        <fieldset className={styles.tripTabs}>
+      <div className={`${styles.optionsRow} flex-col items-stretch gap-3 sm:flex-row sm:items-center`}>
+        <fieldset className={`${styles.tripTabs} sm:w-auto`}>
           <legend className={styles.visuallyHidden}>Trip type</legend>
           {TRIP_TYPES.map((trip) => (
             <button
               key={trip.id}
               type="button"
-              className={styles.tripTab}
+              className={`${styles.tripTab} flex-1 text-center sm:flex-none`}
               data-active={trip.id === tripType}
               aria-pressed={trip.id === tripType}
               onClick={() => setTripType(trip.id)}
@@ -133,7 +133,7 @@ export function SearchPanel({ onSearch }: SearchPanelProps) {
         <div className={styles.rightOptions}>
           <ClassField value={seatClass} onChange={setSeatClass} />
 
-          <button type="submit" className={styles.searchButton}>
+          <button type="submit" className={`${styles.searchButton} flex-1 sm:flex-none`}>
             Search
           </button>
         </div>

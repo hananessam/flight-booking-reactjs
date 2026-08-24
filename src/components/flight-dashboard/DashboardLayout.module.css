@@ -14,10 +14,7 @@
 
   position: relative;
   display: flex;
-  gap: 24px;
-  min-width: 1180px;
-  min-height: 820px;
-  padding: 44px;
+  min-height: 100vh;
   background: var(--fd-mint);
   overflow: hidden;
   font-family: 'Poppins', var(--sans), sans-serif;

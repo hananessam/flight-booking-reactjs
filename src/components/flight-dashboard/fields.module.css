@@ -54,3 +54,9 @@
   width: 17px;
   height: 17px;
 }
+
+@media (max-width: 720px) {
+  .swapButton {
+    align-self: center;
+  }
+}

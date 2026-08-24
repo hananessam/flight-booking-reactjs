@@ -35,7 +35,7 @@ export function FlightsPage() {
 
       <SearchSummary search={search} />
 
-      <div className={styles.resultsRow}>
+      <div className={`${styles.resultsRow} flex-col lg:flex-row`}>
         <FlightResults flights={filteredFlights} />
         <DetailPanel
           origin={search.origin}

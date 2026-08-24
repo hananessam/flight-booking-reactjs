@@ -14,7 +14,7 @@ interface FlightSegmentRowProps {
 
 export function FlightSegmentRow({ segment, index, canRemove, onRemove, onChange }: FlightSegmentRowProps) {
   return (
-    <div className={styles.row}>
+    <div className={`${styles.row} flex-col items-stretch gap-2 md:flex-row md:items-center`}>
       <span className={styles.index} aria-hidden="true">
         {index + 1}
       </span>

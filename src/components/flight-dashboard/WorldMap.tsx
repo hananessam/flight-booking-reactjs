@@ -9,19 +9,30 @@ interface WorldMapProps {
   readonly destination: CityOption
 }
 
-const LABEL_EDGE = 30
+const LABEL_EDGE_PCT = 12
+
+/** Percentage-of-container positioning so the fixed lon/lat projection stays aligned at any rendered width. */
+function toPercent(point: Point) {
+  return { xPct: (point.x / MAP_WIDTH) * 100, yPct: (point.y / MAP_HEIGHT) * 100 }
+}
 
 function labelStyle(point: Point): CSSProperties {
-  const translateY = point.y < MAP_HEIGHT - 14 ? 12 : -12
+  const { xPct, yPct } = toPercent(point)
+  const translateY = yPct < 85 ? 12 : -12
   let translateX = '-50%'
-  if (point.x < LABEL_EDGE) translateX = '0%'
-  else if (point.x > MAP_WIDTH - LABEL_EDGE) translateX = '-100%'
+  if (xPct < LABEL_EDGE_PCT) translateX = '0%'
+  else if (xPct > 100 - LABEL_EDGE_PCT) translateX = '-100%'
 
   return {
-    left: point.x,
-    top: point.y,
+    left: `${xPct}%`,
+    top: `${yPct}%`,
     transform: `translate(${translateX}, ${translateY}px)`,
   }
+}
+
+function markerStyle(point: Point): CSSProperties {
+  const { xPct, yPct } = toPercent(point)
+  return { left: `${xPct}%`, top: `${yPct}%` }
 }
 
 export function WorldMap({ origin, destination }: WorldMapProps) {
@@ -29,7 +40,7 @@ export function WorldMap({ origin, destination }: WorldMapProps) {
 
   return (
     <div className={styles.map} aria-hidden="true">
-      <div className={styles.inner} style={{ width: MAP_WIDTH, height: MAP_HEIGHT }}>
+      <div className={styles.inner} style={{ aspectRatio: `${MAP_WIDTH} / ${MAP_HEIGHT}` }}>
         <svg className={styles.svg} viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}>
           {LAND_DOTS.map((dot, index) => (
             <circle key={index} className={styles.landDot} cx={dot.x} cy={dot.y} r={0.7} />
@@ -48,7 +59,7 @@ export function WorldMap({ origin, destination }: WorldMapProps) {
 
         <PlaneMarkerIcon
           className={styles.plane}
-          style={{ left: to.x, top: to.y, transform: `translate(-50%, -50%) rotate(${angle}deg)` }}
+          style={{ ...markerStyle(to), transform: `translate(-50%, -50%) rotate(${angle}deg)` }}
         />
 
         <span className={styles.cityLabel} style={labelStyle(from)}>
