@@ -1,4 +1,4 @@
-import type { ActiveUser, Flight, FlightSegment, NavItem } from './types'
+import type { ActiveUser, CityOption, Flight, FlightSegment, NavItem } from './types'
 
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard' },
@@ -18,17 +18,35 @@ export const ACTIVE_USERS: ActiveUser[] = [
 
 export const ACTIVE_USERS_OVERFLOW = 70
 
+export const CITIES: CityOption[] = [
+  { code: 'JFK', city: 'New York' },
+  { code: 'BOM', city: 'Mumbai' },
+  { code: 'LHR', city: 'London' },
+  { code: 'DXB', city: 'Dubai' },
+  { code: 'SIN', city: 'Singapore' },
+  { code: 'CDG', city: 'Paris' },
+  { code: 'HND', city: 'Tokyo' },
+  { code: 'SYD', city: 'Sydney' },
+  { code: 'FRA', city: 'Frankfurt' },
+  { code: 'DOH', city: 'Doha' },
+]
+
+export const DEFAULT_ORIGIN: CityOption = CITIES[0]
+export const DEFAULT_DESTINATION: CityOption = CITIES[1]
+export const DEFAULT_DEPARTURE_DATE = new Date(2019, 6, 29)
+export const DEFAULT_RETURN_DATE = new Date(2019, 7, 5)
+
 export const DEFAULT_SEGMENTS: FlightSegment[] = [
-  { id: 'seg-1', from: 'New York (JFK)', to: 'Mumbai (BOM)', date: '29 July 2019' },
-  { id: 'seg-2', from: 'Mumbai (BOM)', to: 'New York (JFK)', date: '5 August 2019' },
+  { id: 'seg-1', from: DEFAULT_ORIGIN, to: DEFAULT_DESTINATION, date: DEFAULT_DEPARTURE_DATE },
+  { id: 'seg-2', from: DEFAULT_DESTINATION, to: DEFAULT_ORIGIN, date: DEFAULT_RETURN_DATE },
 ]
 
 export function createEmptySegment(): FlightSegment {
   return {
     id: crypto.randomUUID(),
-    from: 'Select origin',
-    to: 'Select destination',
-    date: 'Select date',
+    from: null,
+    to: null,
+    date: null,
   }
 }
 

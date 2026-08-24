@@ -1,6 +1,7 @@
 import type { FlightSegment } from './types'
-import { ArrowRightIcon, CalendarIcon, CloseIcon, PinIcon } from './icons'
-import fieldStyles from './fields.module.css'
+import { ArrowRightIcon, CloseIcon } from './icons'
+import { CityField } from './CityField'
+import { DateField } from './DateField'
 import styles from './FlightSegmentRow.module.css'
 
 interface FlightSegmentRowProps {
@@ -8,31 +9,35 @@ interface FlightSegmentRowProps {
   readonly index: number
   readonly canRemove: boolean
   readonly onRemove: () => void
+  readonly onChange: (segment: FlightSegment) => void
 }
 
-export function FlightSegmentRow({ segment, index, canRemove, onRemove }: FlightSegmentRowProps) {
+export function FlightSegmentRow({ segment, index, canRemove, onRemove, onChange }: FlightSegmentRowProps) {
   return (
     <div className={styles.row}>
       <span className={styles.index} aria-hidden="true">
         {index + 1}
       </span>
 
-      <button type="button" className={fieldStyles.field}>
-        <PinIcon className={fieldStyles.fieldIcon} />
-        <span>{segment.from}</span>
-      </button>
+      <CityField
+        value={segment.from}
+        onChange={(from) => onChange({ ...segment, from })}
+        excludeCode={segment.to?.code}
+        ariaLabel={`Flight ${index + 1} origin`}
+        placeholder="Select origin"
+      />
 
       <ArrowRightIcon className={styles.arrow} aria-hidden="true" />
 
-      <button type="button" className={fieldStyles.field}>
-        <PinIcon className={fieldStyles.fieldIcon} />
-        <span>{segment.to}</span>
-      </button>
+      <CityField
+        value={segment.to}
+        onChange={(to) => onChange({ ...segment, to })}
+        excludeCode={segment.from?.code}
+        ariaLabel={`Flight ${index + 1} destination`}
+        placeholder="Select destination"
+      />
 
-      <button type="button" className={`${fieldStyles.field} ${fieldStyles.fieldFixed}`}>
-        <CalendarIcon className={fieldStyles.fieldIcon} />
-        <span>{segment.date}</span>
-      </button>
+      <DateField value={segment.date} onChange={(date) => onChange({ ...segment, date })} />
 
       <button
         type="button"

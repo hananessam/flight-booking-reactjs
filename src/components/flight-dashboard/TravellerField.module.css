@@ -1,0 +1,64 @@
+.wrapper {
+  position: relative;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 200px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--fd-white);
+  box-shadow: 0 20px 40px -16px var(--fd-shadow-strong);
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fd-text);
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepButton {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fd-field-bg);
+  color: var(--fd-green);
+  cursor: pointer;
+}
+
+.stepButton:disabled {
+  color: var(--fd-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.stepIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.count {
+  min-width: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fd-text);
+}

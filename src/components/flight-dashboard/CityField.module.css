@@ -1,0 +1,58 @@
+.wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  min-width: 220px;
+  max-height: 280px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: 16px;
+  background: var(--fd-white);
+  box-shadow: 0 20px 40px -16px var(--fd-shadow-strong);
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  color: var(--fd-text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.option:hover {
+  background: var(--fd-field-bg);
+}
+
+.option[data-selected='true'] {
+  background: var(--fd-field-bg);
+  font-weight: 700;
+}
+
+.optionCity {
+  font-weight: 600;
+}
+
+.optionCode {
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  color: var(--fd-muted);
+}

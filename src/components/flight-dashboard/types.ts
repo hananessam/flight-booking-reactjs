@@ -14,11 +14,16 @@ export interface Flight {
   price: number
 }
 
+export interface CityOption {
+  code: string
+  city: string
+}
+
 export interface FlightSegment {
   id: string
-  from: string
-  to: string
-  date: string
+  from: CityOption | null
+  to: CityOption | null
+  date: Date | null
 }
 
 export interface NavItem {
