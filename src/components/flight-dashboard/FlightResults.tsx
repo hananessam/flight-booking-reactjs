@@ -1,13 +1,17 @@
-import { FLIGHTS, TOTAL_RESULTS } from './data'
+import type { Flight } from './types'
 import { ChevronDownIcon, FilterIcon } from './icons'
 import { FlightCard } from './FlightCard'
 import styles from './FlightResults.module.css'
 
-export function FlightResults() {
+interface FlightResultsProps {
+  readonly flights: readonly Flight[]
+}
+
+export function FlightResults({ flights }: FlightResultsProps) {
   return (
     <section className={styles.results} aria-label="Flight results">
       <div className={styles.header}>
-        <h2 className={styles.heading}>Result ({TOTAL_RESULTS})</h2>
+        <h2 className={styles.heading}>Result ({flights.length})</h2>
         <div className={styles.actions}>
           <button type="button" className={styles.actionButton}>
             <FilterIcon className={styles.actionIcon} />
@@ -20,13 +24,17 @@ export function FlightResults() {
         </div>
       </div>
 
-      <ul className={styles.list}>
-        {FLIGHTS.map((flight) => (
-          <li key={flight.id}>
-            <FlightCard flight={flight} />
-          </li>
-        ))}
-      </ul>
+      {flights.length > 0 ? (
+        <ul className={styles.list}>
+          {flights.map((flight) => (
+            <li key={flight.id}>
+              <FlightCard flight={flight} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className={styles.empty}>No flights match this filter.</p>
+      )}
     </section>
   )
 }

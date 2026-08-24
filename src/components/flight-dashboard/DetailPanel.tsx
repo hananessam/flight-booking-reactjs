@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import type { StopFilter } from './types'
 import { PlaneMarkerIcon } from './icons'
 import styles from './DetailPanel.module.css'
@@ -11,8 +10,13 @@ const STOP_FILTERS: { id: StopFilter; label: string }[] = [
 
 const PRICE_RANGE = { min: 500, max: 2500 }
 
-export function DetailPanel() {
-  const [stopFilter, setStopFilter] = useState<StopFilter>('non-stop')
+interface DetailPanelProps {
+  readonly stopFilter: StopFilter
+  readonly onStopFilterChange: (filter: StopFilter) => void
+}
+
+export function DetailPanel({ stopFilter, onStopFilterChange }: DetailPanelProps) {
+  const activeLabel = STOP_FILTERS.find((filter) => filter.id === stopFilter)?.label
 
   return (
     <aside className={styles.panel} aria-label="Route and price filters">
@@ -23,7 +27,7 @@ export function DetailPanel() {
         </div>
         <div className={styles.routeMid} aria-hidden="true">
           <PlaneMarkerIcon className={styles.routeMidIcon} />
-          <span className={styles.routeMidLabel}>Non-stop</span>
+          <span className={styles.routeMidLabel}>{activeLabel}</span>
         </div>
         <div className={`${styles.routeEndpoint} ${styles.routeEndpointEnd}`}>
           <span className={styles.routeLabel}>To</span>
@@ -53,7 +57,7 @@ export function DetailPanel() {
             className={styles.stopFilter}
             data-active={filter.id === stopFilter}
             aria-pressed={filter.id === stopFilter}
-            onClick={() => setStopFilter(filter.id)}
+            onClick={() => onStopFilterChange(filter.id)}
           >
             {filter.label}
           </button>

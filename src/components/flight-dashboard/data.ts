@@ -18,9 +18,6 @@ export const ACTIVE_USERS: ActiveUser[] = [
 
 export const ACTIVE_USERS_OVERFLOW = 70
 
-/** Total matching results reported by search, independent of how many are rendered below. */
-export const TOTAL_RESULTS = 25
-
 export const FLIGHTS: Flight[] = [
   {
     id: 'fl-1',
@@ -48,22 +45,44 @@ export const FLIGHTS: Flight[] = [
     id: 'fl-3',
     airline: 'Lufthansa',
     from: 'JFK',
-    fromTime: '13:00',
+    fromTime: '09:40',
     to: 'BOM',
-    toTime: '14:20',
-    duration: '11h 20m',
-    stops: 'non-stop',
-    price: 1872,
+    toTime: '23:50',
+    duration: '14h 10m',
+    stops: 'one-stop',
+    price: 1288,
   },
   {
     id: 'fl-4',
     airline: 'Emirates',
     from: 'JFK',
-    fromTime: '13:00',
+    fromTime: '21:15',
     to: 'BOM',
-    toTime: '14:20',
-    duration: '11h 20m',
-    stops: 'non-stop',
-    price: 1872,
+    toTime: '11:35',
+    duration: '14h 20m',
+    stops: 'one-stop',
+    price: 1345,
+  },
+  {
+    id: 'fl-5',
+    airline: 'Etihad Airways',
+    from: 'JFK',
+    fromTime: '06:05',
+    to: 'BOM',
+    toTime: '02:50',
+    duration: '20h 45m',
+    stops: 'more-stops',
+    price: 1042,
+  },
+  {
+    id: 'fl-6',
+    airline: 'British Airways',
+    from: 'JFK',
+    fromTime: '18:30',
+    to: 'BOM',
+    toTime: '17:05',
+    duration: '22h 35m',
+    stops: 'more-stops',
+    price: 986,
   },
 ]

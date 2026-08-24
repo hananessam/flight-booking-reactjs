@@ -59,3 +59,14 @@
   gap: 12px;
   overflow-y: auto;
 }
+
+.empty {
+  margin: 0;
+  padding: 32px 20px;
+  border-radius: 16px;
+  background: var(--fd-white);
+  box-shadow: 0 10px 24px -16px var(--fd-shadow);
+  text-align: center;
+  font-size: 13px;
+  color: var(--fd-muted);
+}
