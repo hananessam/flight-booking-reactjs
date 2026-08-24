@@ -109,17 +109,6 @@ export function ChevronDownIcon(props: IconProps) {
   )
 }
 
-export function FilterIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M4 6h16M8 12h12M4 18h16" />
-      <circle cx="6" cy="6" r="1.6" fill="currentColor" stroke="none" />
-      <circle cx="14" cy="12" r="1.6" fill="currentColor" stroke="none" />
-      <circle cx="9" cy="18" r="1.6" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
-
 export function SeatClassIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>
