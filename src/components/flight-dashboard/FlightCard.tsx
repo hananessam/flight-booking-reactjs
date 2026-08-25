@@ -1,5 +1,7 @@
-import type { Flight } from './types'
+import { useState } from 'react'
+import type { Flight, SeatClassOption } from './types'
 import { PlaneIcon } from './icons'
+import { BookingModal } from './BookingModal'
 import styles from './FlightCard.module.css'
 
 const priceFormatter = new Intl.NumberFormat('en-US', {
@@ -10,9 +12,14 @@ const priceFormatter = new Intl.NumberFormat('en-US', {
 
 interface FlightCardProps {
   readonly flight: Flight
+  readonly travellers: number
+  readonly seatClass: SeatClassOption
 }
 
-export function FlightCard({ flight }: FlightCardProps) {
+export function FlightCard({ flight, travellers, seatClass }: FlightCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isBooked, setIsBooked] = useState(false)
+
   return (
     <article className={styles.card}>
       <div className={styles.airline}>
@@ -41,9 +48,24 @@ export function FlightCard({ flight }: FlightCardProps) {
 
       <span className={styles.price}>{priceFormatter.format(flight.price)}</span>
 
-      <button type="button" className={styles.bookButton}>
-        Book now
+      <button
+        type="button"
+        className={styles.bookButton}
+        disabled={isBooked}
+        onClick={() => setIsModalOpen(true)}
+      >
+        {isBooked ? 'Booked' : 'Book now'}
       </button>
+
+      {isModalOpen && (
+        <BookingModal
+          flight={flight}
+          travellers={travellers}
+          seatClass={seatClass}
+          onClose={() => setIsModalOpen(false)}
+          onConfirmed={() => setIsBooked(true)}
+        />
+      )}
     </article>
   )
 }

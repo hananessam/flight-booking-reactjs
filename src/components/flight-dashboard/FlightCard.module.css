@@ -102,6 +102,12 @@
   cursor: pointer;
 }
 
+.bookButton:disabled {
+  background: var(--fd-field-bg);
+  color: var(--fd-muted);
+  cursor: default;
+}
+
 /* Below this container width the 6-column layout gets too tight to read; reflow to a 3x3 grid. */
 @container (max-width: 560px) {
   .card {

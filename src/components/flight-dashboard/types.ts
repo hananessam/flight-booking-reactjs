@@ -58,6 +58,13 @@ export interface NavItem {
   path: string
 }
 
+export interface Booking {
+  reference: string
+  flight: Flight
+  travellers: number
+  seatClass: SeatClassOption
+}
+
 export interface ActiveUser {
   id: string
   initial: string
